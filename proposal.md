@@ -21,6 +21,10 @@ A recreation of the classic Google Game 'Snake' but with a twist! While your sna
 
 ## Outcomes
 Ideal Outcome: 
-- 
+- My ideal outcome for this project to recreate a copy of Snake but with added features where the snake can shrink or change colors, body, or have accesories.
+
+Minimal Viable Outcome:
+- If the project's programming turns out to be harder than expected, than at least having the features where the snake shrinks and change colors would be a viable outcome.
 
 ## Milestones
+- 
