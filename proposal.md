@@ -1,7 +1,7 @@
 # Snake-B-Snake
 
 ## Repository
-https://github.com/LuisaLara18/Dress-Up-Luisa
+https://github.com/LuisaLara18/Snake-B-Snake
 
 ## Description
 A recreation of the classic Google Game 'Snake' but with a twist! While your snake character has to eat apples to grow, you must avoid other fruits so your snake can grow to its full length!
