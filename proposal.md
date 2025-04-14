@@ -15,9 +15,12 @@ A recreation of the classic Google Game 'Snake' but with a twist! While your sna
   - This feature would be executed by having the snake change color when it passes over a dragonfruit, gain accessories when it passes over bananas, and change body shape when it passes over blueberries. The snake will not gain length if it passes over these fruit, and the fruits will dissipate or randomize in a different location should the player decide not to collect it. 
 
 ## Challenges
-- 
+- I must learn how to program the snake to increase in length when it passes over an apple.
+- I must learn how to program the snake to shrink in length when it passes over a trash pile.
+- I must learn how to change the snake's appearance when it passes over a dragonfruit, bananas, and blueberries.
 
 ## Outcomes
-
+Ideal Outcome: 
+- 
 
 ## Milestones
