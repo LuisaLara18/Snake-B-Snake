@@ -67,6 +67,12 @@ class Snake():
 
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(6, 10), Vector2(7, 10)]
+        self.direction = Vector2(1, 0)
+
+    def move_snake(self):
+        body_copy = self.body[:-1]
+        body_copy.insert(0, body_copy[0] + self.direction)
+        self.body = body_copy[:]
 
     def draw_snake(self):
         for block in self.body:
@@ -87,11 +93,25 @@ blueberry = BlueberryFruit()
 trash = TrashPile()
 snake = Snake()
 
+SCREEN_UPDATE = pygame.USEREVENT
+pygame.time.set_timer(SCREEN_UPDATE, 150)
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == SCREEN_UPDATE:
+            snake.move_snake()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                snake.direction = Vector2(0, -1)
+            if event.key == pygame.K_DOWN:
+                snake.direction = Vector2(0, 1)
+            if event.key == pygame.K_RIGHT:
+                snake.direction = Vector2(1, 0)
+            if event.key == pygame.K_LEFT:
+                snake.direction = Vector2(-1, 0)
         
     screen.fill(pygame.Color(175, 215, 70))
 
@@ -101,7 +121,7 @@ while True:
     blueberry.draw_blueberry()
     trash.draw_trash()
     snake.draw_snake()
-    
+
     pygame.display.update()
     clock.tick(60)
 
