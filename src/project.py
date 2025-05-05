@@ -21,6 +21,9 @@ class AppleFruit():
 class DragonfruitFruit():
 
     def __init__(self):
+        self.randomize()
+
+    def randomize(self):
         self.x = random.randint(0, 19)
         self.y = random.randint(0, 19)
         self.pos = Vector2(self.x, self.y)
@@ -72,13 +75,20 @@ class Snake():
         self.body = [Vector2(5, 10), Vector2(6, 10), Vector2(7, 10)]
         self.direction = Vector2(1, 0)
         self.new_block = False
+        self.remove_block = False
 
     def move_snake(self):
         if self.new_block == True:
             body_copy = self.body[:]
             body_copy.insert(0, body_copy[0] + self.direction)
+            print('added')
             self.body = body_copy[:]
             self.new_block = False
+        if self.remove_block == True:
+            body_copy = self.body[:]
+            body_copy.pop()
+            self.body = body_copy[:]
+            self.remove_block = False
         else:
             body_copy = self.body[:-1]
             body_copy.insert(0, body_copy[0] + self.direction)
@@ -86,6 +96,9 @@ class Snake():
 
     def add_block(self):
         self.new_block = True
+
+    def subtract_block(self):
+        self.remove_block = True
 
     def draw_snake(self):
         for block in self.body:
@@ -112,7 +125,8 @@ class GamePlay():
             self.apple.randomize()
             self.snake.add_block()
         if self.dragonfruit.pos == self.snake.body[0]:
-            print('snack')
+            self.dragonfruit.randomize()
+            self.snake.subtract_block()
         if self.banana.pos == self.snake.body[0]:
             print('snack')
         if self.blueberry.pos == self.snake.body[0]:
