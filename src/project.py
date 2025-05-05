@@ -6,6 +6,9 @@ import sys
 class AppleFruit():
 
     def __init__(self):
+        self.randomize()
+
+    def randomize(self):
         self.x = random.randint(0, 19)
         self.y = random.randint(0, 19)
         self.pos = Vector2(self.x, self.y)
@@ -68,16 +71,62 @@ class Snake():
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(6, 10), Vector2(7, 10)]
         self.direction = Vector2(1, 0)
+        self.new_block = False
 
     def move_snake(self):
-        body_copy = self.body[:-1]
-        body_copy.insert(0, body_copy[0] + self.direction)
-        self.body = body_copy[:]
+        if self.new_block == True:
+            body_copy = self.body[:]
+            body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy[:]
+            self.new_block = False
+        else:
+            body_copy = self.body[:-1]
+            body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy[:]
+
+    def add_block(self):
+        self.new_block = True
 
     def draw_snake(self):
         for block in self.body:
             block_rect = pygame.Rect(block.x * 40, block.y * 40, 40, 40)
             pygame.draw.rect(screen, (183, 111, 122), block_rect)
+
+
+class GamePlay():
+
+    def __init__(self):
+        self.snake = Snake()
+        self.apple = AppleFruit()
+        self.dragonfruit = DragonfruitFruit()
+        self.banana = BananaFruit()
+        self.blueberry = BlueberryFruit()
+        self.trash = TrashPile()
+
+    def update(self):
+        self.snake.move_snake()
+        self.check_collision()
+
+    def check_collision(self):
+        if self.apple.pos == self.snake.body[0]:
+            self.apple.randomize()
+            self.snake.add_block()
+        if self.dragonfruit.pos == self.snake.body[0]:
+            print('snack')
+        if self.banana.pos == self.snake.body[0]:
+            print('snack')
+        if self.blueberry.pos == self.snake.body[0]:
+            print('snack')
+        if self.trash.pos == self.snake.body[0]:
+            print('snack')
+
+    def draw_elements(self):
+        self.apple.draw_apple()
+        self.snake.draw_snake()
+        self.dragonfruit.draw_dragonfruit()
+        self.banana.draw_banana()
+        self.blueberry.draw_blueberry()
+        self.trash.draw_trash()
 
 
 pygame.init()
@@ -86,12 +135,7 @@ cell_number = 20
 screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size))
 clock = pygame.time.Clock()
 
-apple = AppleFruit()
-dragonfruit = DragonfruitFruit()
-banana = BananaFruit()
-blueberry = BlueberryFruit()
-trash = TrashPile()
-snake = Snake()
+main_game = GamePlay()
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
@@ -102,25 +146,20 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == SCREEN_UPDATE:
-            snake.move_snake()
+            main_game.update()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                snake.direction = Vector2(0, -1)
+                main_game.snake.direction = Vector2(0, -1)
             if event.key == pygame.K_DOWN:
-                snake.direction = Vector2(0, 1)
+                main_game.snake.direction = Vector2(0, 1)
             if event.key == pygame.K_RIGHT:
-                snake.direction = Vector2(1, 0)
+                main_game.snake.direction = Vector2(1, 0)
             if event.key == pygame.K_LEFT:
-                snake.direction = Vector2(-1, 0)
+                main_game.snake.direction = Vector2(-1, 0)
         
     screen.fill(pygame.Color(175, 215, 70))
 
-    apple.draw_apple()
-    dragonfruit.draw_dragonfruit()
-    banana.draw_banana()
-    blueberry.draw_blueberry()
-    trash.draw_trash()
-    snake.draw_snake()
+    main_game.draw_elements()
 
     pygame.display.update()
     clock.tick(60)
