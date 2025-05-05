@@ -15,6 +15,18 @@ class AppleFruit():
         pygame.draw.rect(screen, (126, 166, 114) , apple_rect)
 
 
+class DragonfruitFruit():
+
+    def __init__(self):
+        self.x = random.randint(0, 19)
+        self.y = random.randint(0, 19)
+        self.pos = Vector2(self.x, self.y)
+
+    def draw_dragonfruit(self):
+        dragonfruit_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
+        pygame.draw.rect(screen, (255, 0, 255), dragonfruit_rect)
+
+
 class TrashPile():
 
     def __init__(self):
@@ -45,6 +57,7 @@ screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_si
 clock = pygame.time.Clock()
 
 apple = AppleFruit()
+dragonfruit = DragonfruitFruit()
 trash = TrashPile()
 snake = Snake()
 
@@ -56,6 +69,7 @@ while True:
         
     screen.fill(pygame.Color(175, 215, 70))
     apple.draw_apple()
+    dragonfruit.draw_dragonfruit()
     trash.draw_trash()
     snake.draw_snake()
     pygame.display.update()
