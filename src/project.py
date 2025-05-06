@@ -60,6 +60,9 @@ class BlueberryFruit():
 class TrashPile():
 
     def __init__(self):
+        self.randomize()
+
+    def randomize(self):
         self.x = random.randint(0, 19)
         self.y = random.randint(0, 19)
         self.pos = Vector2(self.x, self.y)
@@ -72,7 +75,7 @@ class TrashPile():
 class Snake():
 
     def __init__(self):
-        self.body = [Vector2(5, 10), Vector2(6, 10), Vector2(7, 10)]
+        self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
         self.direction = Vector2(1, 0)
         self.new_block = False
         self.remove_block = False
@@ -81,7 +84,6 @@ class Snake():
         if self.new_block == True:
             body_copy = self.body[:]
             body_copy.insert(0, body_copy[0] + self.direction)
-            print('added')
             self.body = body_copy[:]
             self.new_block = False
         if self.remove_block == True:
@@ -119,6 +121,7 @@ class GamePlay():
     def update(self):
         self.snake.move_snake()
         self.check_collision()
+        self.check_fail()
 
     def check_collision(self):
         if self.apple.pos == self.snake.body[0]:
@@ -126,13 +129,26 @@ class GamePlay():
             self.snake.add_block()
         if self.dragonfruit.pos == self.snake.body[0]:
             self.dragonfruit.randomize()
-            self.snake.subtract_block()
         if self.banana.pos == self.snake.body[0]:
             print('snack')
         if self.blueberry.pos == self.snake.body[0]:
             print('snack')
         if self.trash.pos == self.snake.body[0]:
-            print('snack')
+            self.trash.randomize()
+            self.snake.subtract_block()
+
+    def game_over():
+        pygame.quit()
+        sys.exit()
+
+    def check_fail(self):
+        if not 0 <= self.snake.body[0].x < 20:
+            self.game_over()
+        if not 0 <= self.snake.body[0].y < 20:
+            self.game_over()
+        for block in self.snake.body[1:]:
+            if block == self.snake.body[0]:
+                self.game_over()
 
     def draw_elements(self):
         self.apple.draw_apple()
@@ -163,13 +179,17 @@ while True:
             main_game.update()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                main_game.snake.direction = Vector2(0, -1)
+                if main_game.snake.direction.y != 1:
+                    main_game.snake.direction = Vector2(0, -1)
             if event.key == pygame.K_DOWN:
-                main_game.snake.direction = Vector2(0, 1)
+                if main_game.snake.direction.y != -1:
+                    main_game.snake.direction = Vector2(0, 1)
             if event.key == pygame.K_RIGHT:
-                main_game.snake.direction = Vector2(1, 0)
+                if main_game.snake.direction.x != -1:
+                    main_game.snake.direction = Vector2(1, 0)
             if event.key == pygame.K_LEFT:
-                main_game.snake.direction = Vector2(-1, 0)
+                if main_game.snake.direction.x != 1:
+                    main_game.snake.direction = Vector2(-1, 0)
         
     screen.fill(pygame.Color(175, 215, 70))
 
