@@ -2,20 +2,27 @@ import pygame
 from pygame.math import Vector2
 import random
 import sys
+import time
 
 class AppleFruit():
 
     def __init__(self):
         self.randomize()
+        self.start_time = time.time()
 
     def randomize(self):
         self.x = random.randint(0, 19)
         self.y = random.randint(0, 19)
         self.pos = Vector2(self.x, self.y)
 
+    def timer(self):
+        if time.time() - self.start_time >= 4:
+            self.kill()
+
     def draw_apple(self):
         apple_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
-        pygame.draw.rect(screen, (126, 166, 114) , apple_rect)
+        screen.blit(apple, apple_rect)
+        # pygame.draw.rect(screen, (126, 166, 114) , apple_rect)
 
 
 class DragonfruitFruit():
@@ -30,31 +37,40 @@ class DragonfruitFruit():
 
     def draw_dragonfruit(self):
         dragonfruit_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
-        pygame.draw.rect(screen, (255, 0, 255), dragonfruit_rect)
+        screen.blit(dragonfruit, dragonfruit_rect)
+        # pygame.draw.rect(screen, (255, 0, 255), dragonfruit_rect)
 
 
 class BananaFruit():
 
     def __init__(self):
+        self.randomize()
+
+    def randomize(self):
         self.x = random.randint(0, 19)
         self.y = random.randint(0, 19)
         self.pos = Vector2(self.x, self.y)
 
     def draw_banana(self):
         banana_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
-        pygame.draw.rect(screen, (255, 255, 224), banana_rect)
+        screen.blit(banana, banana_rect)
+        # pygame.draw.rect(screen, (255, 255, 224), banana_rect)
 
 
 class BlueberryFruit():
 
     def __init__(self):
+        self.randomize()
+
+    def randomize(self):
         self.x = random.randint(0, 19)
         self.y = random.randint(0, 19)
         self.pos = Vector2(self.x, self.y)
 
     def draw_blueberry(self):
         blueberry_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
-        pygame.draw.rect(screen, (45, 63, 255), blueberry_rect)
+        screen.blit(blueberry, blueberry_rect)
+        # pygame.draw.rect(screen, (45, 63, 255), blueberry_rect)
 
 
 class TrashPile():
@@ -69,7 +85,8 @@ class TrashPile():
 
     def draw_trash(self):
         trash_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
-        pygame.draw.rect(screen, (128, 128, 128), trash_rect)
+        screen.blit(trash_pile, trash_rect)
+        # pygame.draw.rect(screen, (128, 128, 128), trash_rect)
 
 
 class Snake():
@@ -130,9 +147,9 @@ class GamePlay():
         if self.dragonfruit.pos == self.snake.body[0]:
             self.dragonfruit.randomize()
         if self.banana.pos == self.snake.body[0]:
-            print('snack')
+            self.banana.randomize()
         if self.blueberry.pos == self.snake.body[0]:
-            print('snack')
+            self.blueberry.randomize()
         if self.trash.pos == self.snake.body[0]:
             self.trash.randomize()
             self.snake.subtract_block()
@@ -165,10 +182,16 @@ cell_number = 20
 screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size))
 clock = pygame.time.Clock()
 
-main_game = GamePlay()
+apple = pygame.image.load('AppleFruit.png').convert_alpha()
+trash_pile = pygame.image.load('TrashPile.png').convert_alpha()
+dragonfruit = pygame.image.load('DragonfruitFruit.png').convert_alpha()
+banana = pygame.image.load('BananaFruit.png').convert_alpha()
+blueberry = pygame.image.load('BlueberryFruit.png').convert_alpha()
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
+
+main_game = GamePlay()
 
 while True:
     for event in pygame.event.get():
@@ -192,9 +215,7 @@ while True:
                     main_game.snake.direction = Vector2(-1, 0)
         
     screen.fill(pygame.Color(175, 215, 70))
-
     main_game.draw_elements()
-
     pygame.display.update()
     clock.tick(60)
 
