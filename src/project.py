@@ -2,27 +2,20 @@ import pygame
 from pygame.math import Vector2
 import random
 import sys
-import time
 
 class AppleFruit():
 
     def __init__(self):
         self.randomize()
-        self.start_time = time.time()
 
     def randomize(self):
         self.x = random.randint(0, 19)
         self.y = random.randint(0, 19)
         self.pos = Vector2(self.x, self.y)
 
-    def timer(self):
-        if time.time() - self.start_time >= 4:
-            self.kill()
-
     def draw_apple(self):
         apple_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
         screen.blit(apple, apple_rect)
-        # pygame.draw.rect(screen, (126, 166, 114) , apple_rect)
 
 
 class DragonfruitFruit():
@@ -38,7 +31,6 @@ class DragonfruitFruit():
     def draw_dragonfruit(self):
         dragonfruit_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
         screen.blit(dragonfruit, dragonfruit_rect)
-        # pygame.draw.rect(screen, (255, 0, 255), dragonfruit_rect)
 
 
 class BananaFruit():
@@ -54,7 +46,6 @@ class BananaFruit():
     def draw_banana(self):
         banana_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
         screen.blit(banana, banana_rect)
-        # pygame.draw.rect(screen, (255, 255, 224), banana_rect)
 
 
 class BlueberryFruit():
@@ -70,7 +61,6 @@ class BlueberryFruit():
     def draw_blueberry(self):
         blueberry_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
         screen.blit(blueberry, blueberry_rect)
-        # pygame.draw.rect(screen, (45, 63, 255), blueberry_rect)
 
 
 class TrashPile():
@@ -86,19 +76,80 @@ class TrashPile():
     def draw_trash(self):
         trash_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
         screen.blit(trash_pile, trash_rect)
-        # pygame.draw.rect(screen, (128, 128, 128), trash_rect)
+
+
+class SecondTrashPile():
+
+    def __init__(self):
+        self.randomize()
+
+    def randomize(self):
+        self.x = random.randint(0, 19)
+        self.y = random.randint(0, 19)
+        self.pos = Vector2(self.x, self.y)
+
+    def draw_second_trash(self):
+        second_trash_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
+        screen.blit(second_trash_pile, second_trash_rect)
+
+
+class ThirdTrashPile():
+
+    def __init__(self):
+        self.randomize()
+
+    def randomize(self):
+        self.x = random.randint(0, 19)
+        self.y = random.randint(0, 19)
+        self.pos = Vector2(self.x, self.y)
+
+    def draw_third_trash(self):
+        third_trash_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
+        screen.blit(third_trash_pile, third_trash_rect)
+
+
+class FourthTrashPile():
+
+    def __init__(self):
+        self.randomize()
+
+    def randomize(self):
+        self.x = random.randint(0, 19)
+        self.y = random.randint(0, 19)
+        self.pos = Vector2(self.x, self.y)
+
+    def draw_fourth_trash(self):
+        fourth_trash_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
+        screen.blit(fourth_trash_pile, fourth_trash_rect)
+
+
+class FifthTrashPile():
+
+    def __init__(self):
+        self.randomize()
+
+    def randomize(self):
+        self.x = random.randint(0, 19)
+        self.y = random.randint(0, 19)
+        self.pos = Vector2(self.x, self.y)
+
+    def draw_fifth_trash(self):
+        fifth_trash_rect = pygame.Rect(self.pos.x * 40, self.pos.y * 40, 40, 40)
+        screen.blit(fifth_trash_pile, fifth_trash_rect)
 
 
 class Snake():
 
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
-        self.direction = Vector2(1, 0)
+        self.direction = Vector2(0, 0)
         self.new_block = False
+        self.new_three_blocks = False
         self.new_five_blocks = False
         self.new_ten_blocks = False
         self.remove_block = False
         self.remove_five_blocks = False
+        self.remove_ten_blocks = False
 
         self.head_up = pygame.image.load('SnakeHeadTop.png').convert_alpha()
         self.head_down = pygame.image.load('SnakeHeadBottom.png').convert_alpha()
@@ -116,26 +167,7 @@ class Snake():
         self.body_turntr = pygame.image.load('SnakeTurnRight.png').convert_alpha()
         self.body_turntl = pygame.image.load('SnakeTurnLeft.png').convert_alpha()
         self.body_turnbl = pygame.image.load('SnakeTurnBottom.png').convert_alpha()
-        self.body_turnbr = pygame.image.load('SnakeTurnTop.png').convert_alpha()
-
-        self.customize_head_up = pygame.image.load('ColoredSnakeHeadTop.png').convert_alpha()
-        self.customize_head_down = pygame.image.load('ColoredSnakeHeadBottom.png').convert_alpha()
-        self.customize_head_right = pygame.image.load('ColoredSnakeHeadRight.png').convert_alpha()
-        self.customize_head_left = pygame.image.load('ColoredSnakeHeadLeft.png').convert_alpha()
-
-        self.customize_tail_up = pygame.image.load('ColoredSnakeTailTop.png').convert_alpha()
-        self.customize_tail_down = pygame.image.load('ColoredSnakeTailBottom.png').convert_alpha()
-        self.customize_tail_right = pygame.image.load('ColoredSnakeTailRight.png').convert_alpha()
-        self.customize_tail_left = pygame.image.load('ColoredSnakeTailLeft.png').convert_alpha()
-
-        self.customize_body_vertical = pygame.image.load('ColoredSnakeBodyTopBottom.png').convert_alpha()
-        self.customize_body_horizontal = pygame.image.load('ColoredSnakeBodyLeftRight.png').convert_alpha()
-
-        self.customize_body_turntr = pygame.image.load('ColoredSnakeTurnRight.png').convert_alpha()
-        self.customize_body_turntl = pygame.image.load('ColoredSnakeTurnLeft.png').convert_alpha()
-        self.customize_body_turnbl = pygame.image.load('ColoredSnakeTurnBottom.png').convert_alpha()
-        self.customize_body_turnbr = pygame.image.load('ColoredSnakeTurnTop.png').convert_alpha()
-                                                    
+        self.body_turnbr = pygame.image.load('SnakeTurnTop.png').convert_alpha()                                     
 
     def move_snake(self):
         if self.new_block == True:
@@ -143,6 +175,12 @@ class Snake():
             body_copy.insert(0, body_copy[0] + self.direction)
             self.body = body_copy[:]
             self.new_block = False
+        elif self.new_three_blocks == True:
+            body_copy = self.body[:]
+            for x in range(3):
+                body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy[:]
+            self.new_three_blocks = False
         elif self.new_five_blocks == True:
             body_copy = self.body[:]
             for x in range(5):
@@ -166,6 +204,12 @@ class Snake():
                 body_copy.pop()
             self.body = body_copy[:]
             self.remove_five_blocks = False
+        elif self.remove_ten_blocks == True:
+            body_copy = self.body[:]
+            for x in range(10):
+                body_copy.pop()
+            self.body = body_copy[:]
+            self.remove_ten_blocks = False
         else:
             body_copy = self.body[:-1]
             body_copy.insert(0, body_copy[0] + self.direction)
@@ -173,6 +217,9 @@ class Snake():
 
     def add_block(self):
         self.new_block = True
+
+    def add_three_blocks(self):
+        self.new_three_blocks = True
 
     def add_five_blocks(self):
         self.new_five_blocks = True
@@ -185,6 +232,13 @@ class Snake():
 
     def subtract_five_blocks(self):
         self.remove_five_blocks = True
+
+    def subtract_ten_blocks(self):
+        self.remove_ten_blocks = True
+
+    def reset(self):
+        self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
+        self.direction = Vector2(0, 0)
 
     def update_head_graphics(self):
         head_relation = self.body[1] - self.body[0]
@@ -244,64 +298,6 @@ class Snake():
                     elif previous_block.y == 1 and next_block.x == 1:
                         screen.blit(self.body_turnbr, block_rect)
 
-    def customize_update_head_graphics(self):
-        head_relation = self.body[1] - self.body[0]
-        if head_relation == Vector2(1, 0):
-            self.head = self.customize_head_left
-        elif head_relation == Vector2(-1, 0):
-            self.head = self.customize_head_right
-        elif head_relation == Vector2(0, 1):
-            self.head = self.customize_head_up
-        elif head_relation == Vector2(0, -1):
-            self.head = self.customize_head_down
-
-    def customize_update_tail_graphics(self):
-        tail_relation = self.body[-2] - self.body[-1]
-        if tail_relation == Vector2(1, 0):
-            self.tail = self.customize_tail_right
-        elif tail_relation == Vector2(-1, 0):
-            self.tail = self.customize_tail_left
-        elif tail_relation == Vector2(0, 1):
-            self.tail = self.customize_tail_down
-        elif tail_relation == Vector2(0, -1):
-            self.tail = self.customize_tail_up
-
-    def customize_snake(self):
-        self.customize_update_head_graphics()
-        self.customize_update_tail_graphics()
-        for index, block in enumerate(self.body):
-            x_pos = int(block.x * 40)
-            y_pos = int(block.y * 40)
-            block_rect = pygame.Rect(x_pos, y_pos, 40, 40)
-            if index == 0:
-                screen.blit(self.head, block_rect)
-            elif index == len(self.body) - 1:
-                screen.blit(self.tail, block_rect)
-            else: 
-                previous_block = self.body[index +1] - block
-                next_block = self.body[index -1] - block
-                if previous_block.x == next_block.x:
-                    screen.blit(self.customize_body_vertical, block_rect)
-                elif previous_block.y == next_block.y:
-                    screen.blit(self.customize_body_horizontal, block_rect)
-                else:
-                    if previous_block.x == -1 and next_block.y == -1:
-                        screen.blit(self.customize_body_turntl, block_rect)
-                    elif previous_block.y == -1 and next_block.x == -1:
-                        screen.blit(self.customize_body_turntl, block_rect)
-                    elif previous_block.x == -1 and next_block.y == 1:
-                        screen.blit(self.customize_body_turnbl, block_rect)
-                    elif previous_block.y == 1 and next_block.x == -1:
-                        screen.blit(self.customize_body_turnbl, block_rect)
-                    elif previous_block.x == 1 and next_block.y == -1:
-                        screen.blit(self.customize_body_turntr, block_rect)
-                    elif previous_block.y == -1 and next_block.x == 1:
-                        screen.blit(self.customize_body_turntr, block_rect)
-                    elif previous_block.x == 1 and next_block.y == 1:
-                        screen.blit(self.customize_body_turnbr, block_rect)
-                    elif previous_block.y == 1 and next_block.x == 1:
-                        screen.blit(self.customize_body_turnbr, block_rect)
-
 
 class GamePlay():
 
@@ -312,6 +308,10 @@ class GamePlay():
         self.banana = BananaFruit()
         self.blueberry = BlueberryFruit()
         self.trash = TrashPile()
+        self.second_trash = SecondTrashPile()
+        self.third_trash = ThirdTrashPile()
+        self.fourth_trash = FourthTrashPile()
+        self.fifth_trash = FifthTrashPile()
 
     def update(self):
         self.snake.move_snake()
@@ -322,22 +322,132 @@ class GamePlay():
         if self.apple.pos == self.snake.body[0]:
             self.apple.randomize()
             self.snake.add_block()
-        if self.dragonfruit.pos == self.snake.body[0]:
+            for block in self.snake.body[1:]:
+                if block == self.apple.pos:
+                    self.apple.randomize()
+            if self.apple.pos == self.dragonfruit.pos:
+                self.apple.randomize()
+            if self.apple.pos == self.banana.pos:
+                self.apple.randomize()
+            if self.apple.pos == self.blueberry.pos:
+                self.apple.randomize()
+            if self.apple.pos == self.trash.pos:
+                self.apple.randomize()
+        elif self.dragonfruit.pos == self.snake.body[0]:
             self.dragonfruit.randomize()
             self.snake.add_ten_blocks()
-        if self.banana.pos == self.snake.body[0]:
+            for block in self.snake.body[1:]:
+                if block == self.dragonfruit.pos:
+                    self.dragonfruit.randomize()
+            if self.dragonfruit.pos == self.apple.pos:
+                self.dragonfruit.randomize()
+            if self.dragonfruit.pos == self.banana.pos:
+                self.dragonfruit.randomize()
+            if self.dragonfruit.pos == self.blueberry.pos:
+                self.dragonfruit.randomize()
+            if self.dragonfruit.pos == self.trash.pos:
+                self.dragonfruit.randomize()
+        elif self.banana.pos == self.snake.body[0]:
             self.banana.randomize()
-            self.snake.subtract_block()
-        if self.blueberry.pos == self.snake.body[0]:
+            self.snake.add_three_blocks()
+            for block in self.snake.body[1:]:
+                if block == self.banana.pos:
+                    self.banana.randomize()
+            if self.banana.pos == self.apple.pos:
+                self.banana.randomize()
+            if self.banana.pos == self.dragonfruit.pos:
+                self.banana.randomize()
+            if self.banana.pos == self.blueberry.pos:
+                self.banana.randomize()
+            if self.banana.pos == self.trash.pos:
+                self.banana.randomize()
+        elif self.blueberry.pos == self.snake.body[0]:
             self.blueberry.randomize()
             self.snake.add_five_blocks()
-        if self.trash.pos == self.snake.body[0]:
+            for block in self.snake.body[1:]:
+                if block == self.blueberry.pos:
+                    self.blueberry.randomize()
+            if self.blueberry.pos == self.apple.pos:
+                self.blueberry.randomize()
+            if self.blueberry.pos == self.dragonfruit.pos:
+                self.blueberry.randomize()
+            if self.blueberry.pos == self.banana.pos:
+                self.blueberry.randomize()
+            if self.blueberry.pos == self.trash.pos:
+                self.blueberry.randomize()
+        elif self.trash.pos == self.snake.body[0]:
             self.trash.randomize()
             self.snake.subtract_five_blocks()
+            for block in self.snake.body[1:]:
+                if block == self.trash.pos:
+                    self.trash.randomize()
+            if self.trash.pos == self.apple.pos:
+                self.trash.randomize()
+            if self.trash.pos == self.dragonfruit.pos:
+                self.trash.randomize()
+            if self.trash.pos == self.banana.pos:
+                self.trash.randomize()
+            if self.trash.pos == self.blueberry.pos:
+                self.trash.randomize()
+        elif self.second_trash.pos == self.snake.body[0]:
+            self.second_trash.randomize()
+            self.snake.subtract_ten_blocks()
+            for block in self.snake.body[1:]:
+                if block == self.second_trash.pos:
+                    self.second_trash.randomize()
+            if self.second_trash.pos == self.apple.pos:
+                self.second_trash.randomize()
+            if self.second_trash.pos == self.dragonfruit.pos:
+                self.second_trash.randomize()
+            if self.second_trash.pos == self.banana.pos:
+                self.second_trash.randomize()
+            if self.second_trash.pos == self.blueberry.pos:
+                self.second_trash.randomize()
+        elif self.third_trash.pos == self.snake.body[0]:
+            self.third_trash.randomize()
+            self.snake.subtract_block()
+            for block in self.snake.body[1:]:
+                if block == self.third_trash.pos:
+                    self.third_trash.randomize()
+            if self.third_trash.pos == self.apple.pos:
+                self.third_trash.randomize()
+            if self.third_trash.pos == self.dragonfruit.pos:
+                self.third_trash.randomize()
+            if self.third_trash.pos == self.banana.pos:
+                self.third_trash.randomize()
+            if self.third_trash.pos == self.blueberry.pos:
+                self.third_trash.randomize()
+        elif self.fourth_trash.pos == self.snake.body[0]:
+            self.fourth_trash.randomize()
+            self.snake.subtract_five_blocks()
+            for block in self.snake.body[1:]:
+                if block == self.fourth_trash.pos:
+                    self.fourth_trash.randomize()
+            if self.fourth_trash.pos == self.apple.pos:
+                self.fourth_trash.randomize()
+            if self.fourth_trash.pos == self.dragonfruit.pos:
+                self.fourth_trash.randomize()
+            if self.fourth_trash.pos == self.banana.pos:
+                self.fourth_trash.randomize()
+            if self.fourth_trash.pos == self.blueberry.pos:
+                self.fourth_trash.randomize()
+        elif self.fifth_trash.pos == self.snake.body[0]:
+            self.fifth_trash.randomize()
+            self.snake.subtract_ten_blocks()
+            for block in self.snake.body[1:]:
+                if block == self.fifth_trash.pos:
+                    self.fifth_trash.randomize()
+            if self.fifth_trash.pos == self.apple.pos:
+                self.fifth_trash.randomize()
+            if self.fifth_trash.pos == self.dragonfruit.pos:
+                self.fifth_trash.randomize()
+            if self.fifth_trash.pos == self.banana.pos:
+                self.fifth_trash.randomize()
+            if self.fifth_trash.pos == self.blueberry.pos:
+                self.fifth_trash.randomize()
 
-    def game_over():
-        pygame.quit()
-        sys.exit()
+    def game_over(self):
+        self.snake.reset()
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < 20:
@@ -356,6 +466,12 @@ class GamePlay():
         self.banana.draw_banana()
         self.blueberry.draw_blueberry()
         self.trash.draw_trash()
+        self.second_trash.draw_second_trash()
+        self.third_trash.draw_third_trash()
+        self.fourth_trash.draw_fourth_trash()
+        self.fifth_trash.draw_fifth_trash()
+
+        self.draw_score()
 
     def draw_grass(self):
         grass_color = (69, 5, 40)
@@ -371,6 +487,21 @@ class GamePlay():
                         grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
                         pygame.draw.rect(screen, grass_color, grass_rect)
 
+    def draw_score(self):
+        score_text = str(len(self.snake.body) - 3)
+        score_surface = game_font.render(score_text, True, (255, 255, 255))
+        score_x = int(cell_size * cell_number - 60)
+        score_y = int(cell_size * cell_number - 40)
+        score_rect = score_surface.get_rect(center = (score_x, score_y))
+        apple_rect = apple.get_rect(midright = (score_rect.left, score_rect.centery))
+        bg_rect = pygame.Rect(apple_rect.left, apple_rect.top, apple_rect.width + score_rect.width + 6, apple_rect.height)
+
+        pygame.draw.rect(screen, (167, 209, 61), bg_rect)
+        screen.blit(score_surface, score_rect)
+        screen.blit(apple, apple_rect)
+        pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)
+
+
 pygame.init()
 cell_size = 40
 cell_number = 20
@@ -379,6 +510,10 @@ clock = pygame.time.Clock()
 
 apple = pygame.image.load('AppleFruit.png').convert_alpha()
 trash_pile = pygame.image.load('TrashPile.png').convert_alpha()
+second_trash_pile = pygame.image.load('TrashPile.png').convert_alpha()
+third_trash_pile = pygame.image.load('TrashPile.png').convert_alpha()
+fourth_trash_pile = pygame.image.load('TrashPile.png').convert_alpha()
+fifth_trash_pile = pygame.image.load('TrashPile.png').convert_alpha()
 dragonfruit = pygame.image.load('DragonfruitFruit.png').convert_alpha()
 banana = pygame.image.load('BananaFruit.png').convert_alpha()
 blueberry = pygame.image.load('BlueberryFruit.png').convert_alpha()
