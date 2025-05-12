@@ -23,14 +23,21 @@ Each file within the Snake-B-Snake repository works to show the brainstorming an
 
 In the game, each fruit is only spawned once and changes position whenever your snake collides with it. Depending on the type of fruit, it can grow either one block in length or all the way to ten blocks. The multiple trash piles also follow the same philosophy, except you can either shrink between one block to twenty blocks in length. There is no way to differentiate between with trash pile eliminates what amount of block, so it's a gamble every time you collide with one! 
 
-There are several ways to die in the game. The main one is eating the trash piles until you either shrink in size or immediately 
+There are several ways to die in the game. The main one is eating the trash piles, but you can accidentally hit the screens edge or run into yourself. You can also die by consuming some of the fruits, as when you consume the larger increment ones, you can lose control of where you are and run into yourself, the screen edge, or a trash pile. Lesson learned, watch the way you collect the fruits to avoid an accidental death! 
+
+Depending on the way to die, you can either restart the game or the game program will close on it's own. If the snake loses length by consuming too many trash piles, then the game program will close by itself. However, if you crash into yourself or the screen edge, you are able to restart the game without the program closing.
+
+### What did I do Differently:
+Although I used a video tutorial to help me create a simplier version of Google's _Snake_ game, I implemented different functions to make my game unique. After learning how to program the snake to grow one block in length, I was able to create multiple methods under the Snake class that allowed different increments of lengths to be gained depending on the fruit consumed. I also learned how to remove different increments of length by creating different methods using the pop() method. 
+
+Different customization tactics I did from the video was the scoreboard and visuals. For the scoreboards, instead of having it count the number of apples or fruits collected, I programmed it to count the block length of the snake. For the visuals, I created them all through Photoshop instead of getting them from Google.
 
 ### Future Areas of Improvement:
+There were some features I wished I was able to code for this project. I wished I was able to implement a despawning feature if the trash piles or fruits weren't collected in time, but I didn't implement it due to the probability of the game being too frustrating have a fruit move spaces after trying to reach for it. My proposal.md file also contained the idea that the blueberries, dragonfruit, and banana would customize your snake, but I thought it wouldn't have made the game more interesting and would have lacked a fun game play mechanic.
 
+Hopefully in the future I am able to gain the skills I need to implement a despawn and customization mechanic in the future, but I am happy with how my game turned out to be.
 
-
-
-With all being said, have fun growing your snake in _Snake-B-Snake_!
+With all being said, I hope you have fun growing your snake in _Snake-B-Snake_!
 
 ## Video Inspiration Credits
 https://www.youtube.com/watch?v=QFvqStqPCRU
