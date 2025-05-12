@@ -12,6 +12,7 @@ Enjoy the world-famous _Snake_ game with a twist! Instead of just eating apples 
 - Eating a banana grows your snake by three blocks.
 - Eating a blueberry grows your snake by five blocks.
 - Eating a dragonfruit grows your snake by ten blocks.
+
 Watch out! Beware of the many trash piles randomized throughout the screen. If you eat one by accident, you'll shrink in size! You can either shrink by one block or all the way to ten blocks!
 
 ## How to Play
