@@ -17,11 +17,18 @@ Just like Google's _Snake_, you use your up, down, left, and right keyboard keys
 Each file within the Snake-B-Snake repository works to show the brainstorming and mechanics of the game! The proposal.md file showed the initial idea of Snake-B-Snake, the README.md file explains the final product of the game, the requirements.txt file lists the Python libraries utilized, and the src folder contains the project Python file and game graphics. The apple, banana, blueberries, dragonfruit, trash pile, and snake graphics were all created by me in Adobe Photoshop using a pixel art style. 
 
 In the game, each fruit is only spawned once and changes position whenever your snake collides with it. Depending on the type of fruit, it can grow either one block in length or all the way to ten blocks.
+
 - Eating an apple grows your snake by one block.
 - Eating a banana grows your snake by three blocks.
 - Eating a blueberry grows your snake by five blocks.
 - Eating a dragonfruit grows your snake by ten blocks.
-The multiple trash piles also follow the same philosophy, except you can either shrink between one block to twenty blocks in length. There is no way to differentiate between with trash pile eliminates what amount of block, so it's a gamble every time you collide with one! 
+The multiple trash piles also follow the same philosophy, except you can either shrink between one block to twenty blocks in length.
+
+- Three trash piles remove one block from your snake.
+- Two trash piles remove five blocks from your snake.
+- Two trash piles remove ten blocks from your snake.
+- One trash pile removes twenty blocks from your snake.
+There is no way to differentiate between with trash pile eliminates what amount of block, so it's a gamble every time you collide with one!
 
 There are several ways to die in the game. The main one is eating the trash piles, but you can accidentally hit the screens edge or run into yourself. You can also die by consuming some of the fruits, as when you consume the larger increment ones, you can lose control of where you are and run into yourself, the screen edge, or a trash pile. Lesson learned, watch the way you collect the fruits to avoid an accidental death! 
 
